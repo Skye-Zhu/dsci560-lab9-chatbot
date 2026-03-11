@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Q&A Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 16px;
+            font-size: 16px;
+        }
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+        .user {
+            background-color: #e8f0fe;
+        }
+        .bot {
+            background-color: #f1f3f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Q&A Chatbot</h1>
+
+    <form method="POST">
+        <input type="text" name="question" placeholder="Ask a question about the PDF" required>
+        <button type="submit">Send</button>
+    </form>
+
+    {% for sender, message in chat_history %}
+        <div class="message {{ 'user' if sender == 'You' else 'bot' }}">
+            <strong>{{ sender }}:</strong><br>
+            {{ message }}
+        </div>
+    {% endfor %}
+</body>
+</html>

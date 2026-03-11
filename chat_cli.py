@@ -1,4 +1,4 @@
-from langchain_community.vectorstores import FAISS
+'''from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from transformers import pipeline
 
@@ -40,8 +40,8 @@ def main():
     print("Loading local language model...")
     generator = pipeline(
         "text-generation",
-        model="distilgpt2",
-        max_new_tokens=100
+        model="google/flan-t5-base",
+        max_new_tokens=128
     )
 
     print("\nChatbot is ready. Type 'exit' to quit.\n")
@@ -69,6 +69,76 @@ def main():
             answer = full_output.strip()
 
         print("\nBot:", answer)
+        print("\nTop retrieved chunks:")
+        for doc in docs:
+            print(doc.metadata)
+
+        print("-" * 60)
+
+
+if __name__ == "__main__":
+    main()'''
+
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+import re
+
+VECTOR_DIR = "vectorstore/faiss_index"
+
+
+def load_vectorstore():
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
+
+    vectorstore = FAISS.load_local(
+        VECTOR_DIR,
+        embeddings,
+        allow_dangerous_deserialization=True
+    )
+    return vectorstore
+
+
+def extract_short_answer(question, text):
+    q = question.lower()
+
+    if "instructor" in q:
+        match = re.search(r"Instructor:\s*(.+)", text)
+        if match:
+            return match.group(1).strip()
+
+    if "goal" in q:
+        match = re.search(r"The Goal:\s*(.+)", text)
+        if match:
+            return match.group(1).strip()
+
+    return text
+
+
+def main():
+    print("Loading vector store...")
+    vectorstore = load_vectorstore()
+
+    print("\nChatbot is ready. Type 'exit' to quit.\n")
+
+    while True:
+        question = input("You: ").strip()
+
+        if question.lower() == "exit":
+            print("Goodbye!")
+            break
+
+        docs = vectorstore.similarity_search(question, k=3)
+
+        if docs:
+            raw_answer = docs[0].page_content
+            answer = extract_short_answer(question, raw_answer)
+        else:
+            answer = "I could not find relevant information in the PDF."
+
+        print("\nBot:")
+        print(answer)
+
         print("\nTop retrieved chunks:")
         for doc in docs:
             print(doc.metadata)

@@ -1,0 +1,42 @@
+
+--- Page 1 ---
+DSCI-560: Data Science Practicum Final Project Proposal 
+Domain-Specific AI Enhanced Group Chat System 
+Instructor: Young H. Cho, Ph.D. 
+   
+1) The Goal: Real Solution to a Real-World Problem 
+ 
+2) For Monday Lecture: In-person Group Meeting 
+a) Set aside time to meet with your teammates before Tuesday's lecture to discuss at least 
+THREE specific domains/topics of interest with known problems that a group of people 
+within that domain face. 
+b) Brainstorm about ways that a domain expert can help that group of people. 
+i) What information/data do they need? 
+ii) Where can one find that information/data? 
+iii) What services can a domain expert provide? 
+c) Think about creative ways that a Group Chat App can be used to help that group of 
+people 
+d) Think about creative ways that an AI Chatbot with Embeddings can be used to play the 
+role of the domain expert within that chat interface 
+e) During Tuesday's lecture, I would like to go to each team to talk about what your 
+team discussed and attempt to guide the team to select the best ideas to pursue 
+ 
+3) For Thursday Lecture: Final Project Proposal Presentations 
+a) Prepare about 5 PowerPoint Slides to discuss your selected Final Project Idea 
+b) Include at least THREE references that indicate that the real-world problem exists 
+c) During the Thursday lecture, each team will be presenting the idea. 
+d) After the presentation, discuss the final project with the team to finalize the 
+selection and complete and submit the Proposal Presentation to the Coursistant 
+website by Friday night. 
+ 
+4) Minimum Requirements for the Project 
+a) There MUST be real-world services (human or digital) that attempt to solve the problem 
+in that domain. The existing company should be profitable. 
+b) Interview at least 9 real-life human beings in-person, Zoom, or over the phone (not a 
+survey) to discuss the problem and how much they are willing to pay for a solution. The 
+interview recordings should be included in the final demo video/presentation. You must 
+get their permission. 
+c) There must be both a Web interface and an App. 
+d) The chat interface should allow you to upload files or pictures. 
+e) The AI solution must use embeddings. 
+f) The AI agent must be able to display pictures. 

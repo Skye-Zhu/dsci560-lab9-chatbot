@@ -7,7 +7,7 @@ from langchain_community.vectorstores import FAISS
 TEXT_DIR = Path("data/extracted")
 VECTOR_DIR = "vectorstore/faiss_index"
 
-
+#
 def load_all_text():
     all_docs = []
     for txt_file in TEXT_DIR.glob("*.txt"):

@@ -114,6 +114,33 @@ def extract_short_answer(question, text):
 
     return text
 
+def split_into_sentences(text):
+    sentences = re.split(r'(?<=[.!?])\s+|\n+', text)
+    return [s.strip() for s in sentences if s.strip()]
+
+
+def extract_best_sentences(question, docs, embeddings, top_n=2):
+    sentences = []
+
+    for doc in docs:
+        sentences.extend(split_into_sentences(doc.page_content))
+
+    if not sentences:
+        return "I could not find relevant information in the PDF."
+
+    question_emb = embeddings.embed_query(question)
+    sentence_embs = embeddings.embed_documents(sentences)
+
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    scores = cosine_similarity([question_emb], sentence_embs)[0]
+
+    ranked = sorted(zip(sentences, scores), key=lambda x: x[1], reverse=True)
+
+    best_sentences = [s for s, _ in ranked[:top_n]]
+
+    return " ".join(best_sentences)
+
 
 def main():
     print("Loading vector store...")
